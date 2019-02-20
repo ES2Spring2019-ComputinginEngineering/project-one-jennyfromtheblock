@@ -2,31 +2,38 @@
 #Allie and Yassi
 
 import numpy as np
+import math
 
-def update_system(acc,pos,vel,time1,time2):
+g = 9.81
+l = 1
+
+def update_system(angAcc,theta,angVel,time1,time2):
     # position and velocity update below
     dt = time2-time1
-    posNext = pos+vel*dt+1/2*acc*dt
-    velNext = vel+acc*dt
-    return posNext,velNext
+    newTheta = theta + angVel * dt
+    newAngVel = angVel + angAcc*dt
+    newAngAcc = (g/l) * math.cos((math.pi/2) - theta)
+    return newTheta,newAngVel,newAngAcc
 
-def print_system(time,pos,vel):
+def print_system(time,theta,angVel, angAcc):
     print("TIME:     ", time)
-    print("POSITION: ", pos)
-    print("VELOCITY: ", vel, "\n")
+    print("Angle: ", theta)
+    print("ANGULAR VELOCITY: ", angVel)
+    print("ANGULAR ACCELERATION: ", angAcc, "\n")
+
 
 # initial conditions
-pos = [0]
-vel = [0]
-acc = [0,1,2,3,4,4,2,2,1,0,0,0,0,-1,-1,-2,-2,-2,-3,-4,-4]
+theta = [30]
+angVel = [0]
+angAcc = [0]
 time = np.linspace(0,20,21)
-print_system(time[0],pos[0],vel[0])
+print_system(time[0],theta[0],angVel[0],angAcc[0])
 
-i = 1
-while i < len(time):
+for i in range(1, len(time)):
     # update position and velocity using previous values and time step
-    posNext, velNext = update_system(acc[i],pos[i-1],vel[i-1],time[i-1],time[i])
-    pos.append(posNext)
-    vel.append(velNext)
-    print_system(time[i],pos[i],vel[i])
+    newTheta, newAngVel , newAngAcc = update_system(angAcc[i-1],theta[i-1],angVel[i-1],time[i-1],time[i])
+    theta.append(newTheta)
+    angVel.append(newAngVel)
+    angAcc.append(newAngAcc)
+    print_system(time[i],theta[i],angVel[i],angAcc[i])
     i += 1
