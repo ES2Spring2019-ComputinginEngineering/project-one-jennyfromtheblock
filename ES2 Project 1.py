@@ -17,13 +17,13 @@ def update_system(angAcc,theta,angVel,time1,time2):
 
 def print_system(time,theta,angVel, angAcc):
     print("TIME:     ", time)
-    print("Angle: ", theta)
+    print("Angle: ", theta*180/math.pi)
     print("ANGULAR VELOCITY: ", angVel)
     print("ANGULAR ACCELERATION: ", angAcc, "\n")
 
 
 # initial conditions
-theta = [30]
+theta = [(math.pi)/6]
 angVel = [0]
 angAcc = [0]
 time = np.linspace(0,20,21)
