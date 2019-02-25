@@ -25,7 +25,7 @@ def print_system(time,theta,angVel, angAcc):
 # initial conditions
 theta = [(math.pi)/6]
 angVel = [0]
-angAcc = [0]
+angAcc = [1]
 time = np.linspace(0,20,21)
 print_system(time[0],theta[0],angVel[0],angAcc[0])
 
