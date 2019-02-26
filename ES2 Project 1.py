@@ -1,4 +1,4 @@
-#Project 1: Pedulum
+#Project 1: Pendulum
 #Allie and Yassi
 
 import matplotlib.pyplot as plt
