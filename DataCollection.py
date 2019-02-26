@@ -5,24 +5,22 @@ from microbit import *
 import math
 import os
 
+myFile = open('/Users/Yasaman/Documents/GitHub/project-one-jennyfromtheblock/angles.txt', 'w')
 angles = []
 
 while True:
     sleep(1000)
     x = accelerometer.get_x()
-    y = accelerometer.get_y()
     z = accelerometer.get_z()
-
     radX = math.atan2(x, z) #Tilt in x-direction
-    radY = math.atan2(y, z) #Tilt in y-direction
-
     degX = radX / math.pi * 180 #Converting angle of x-tilt from radians to degrees
-    degY = radY / math.pi * 180 #Converting angle of y-tilt from radians to degrees
 
-    theta = 180 - degY
+    if degX > 0:
+        theta = - degX + 180
+    else:
+        theta = - (degX + 180)
+
     angles.append(theta)
-
-    myFile = open('/Users/Yasaman/Documents/GitHub/HW5-ykhorsandian/20plus_words.txt', 'w')
-
-
+    myFile.write(str(theta))
+    myFile.write("\n")
     print(angles)
