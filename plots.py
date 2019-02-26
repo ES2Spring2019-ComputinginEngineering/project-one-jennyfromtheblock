@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-g = 9.81
+g = -9.81
 l = 0.3
 
 def update_system(angAcc,theta,angVel,time1,time2):
@@ -19,7 +19,7 @@ def update_system(angAcc,theta,angVel,time1,time2):
 # initial conditions
 theta = [(math.pi)/6]
 angVel = [0]
-angAcc = [(g/l) * math.cos((math.pi/2) - theta[0])]
+angAcc = [0]
 time = np.linspace(0,10,10000)
 
 for i in range(1, len(time)):
@@ -29,30 +29,31 @@ for i in range(1, len(time)):
     angVel.append(newAngVel)
     angAcc.append(newAngAcc)
     i += 1
-    
+
+#Plotting the angle vs. time graph
 plt.subplot(3,1,1)
 plt.plot(time, theta, 'ro--') 
-
 plt.xlabel('Time (seconds)')
-plt.ylabel('Position (m)')
+plt.ylabel('Angle (radians)')
 plt.title('Position vs Time')
-plt.xlim((0, 10)) # set x range to -1 to 8
+plt.xlim((0, 10)) 
 plt.grid()
 
+#Plotting the angular velocity vs. time graph
 plt.subplot(3,1,2)
 plt.plot(time, angVel, 'ro--') 
 plt.xlabel('Time (seconds)')
 plt.ylabel('Velocity (m/s)')
 plt.title('Velocity vs Time')
-plt.xlim((0, 10)) # set x range to -1 to 8
+plt.xlim((0, 10)) 
 plt.grid()
 
-
+#Plotting the angular acceleration vs. time graph
 plt.subplot(3,1,3)
 plt.plot(time, angAcc, 'ro--') 
 plt.xlabel('Time (seconds)')
 plt.ylabel('Acceleration (m/s^2)')
 plt.title('Acceleration vs Time')
-plt.xlim((0, 10)) # set x range to -1 to 8
+plt.xlim((0, 10)) 
 plt.grid()
 plt.tight_layout()
