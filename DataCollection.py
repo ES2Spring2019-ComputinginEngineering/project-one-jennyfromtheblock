@@ -27,9 +27,8 @@ while True:
             time1 = running_time() #get the current running time
             time.append(time1-time0)
             angles.append(theta)
-            myFile.write(str(theta))
-            myFile.write("\n")
-            print(angles)
 
             if button_b.is_pressed()== True:
+                myFile.write(str(angles))
+                myFile.write(str(time))
                 myFile.close()
