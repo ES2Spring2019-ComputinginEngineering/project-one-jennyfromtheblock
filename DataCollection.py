@@ -5,9 +5,8 @@ from microbit import *
 import math
 import os
 
-myFile = open('angles.txt', 'w')
-angles = []
-time = []
+angles = open('angles.txt', 'w')
+time = open('time.txt', 'w')
 
 while True:
     if button_a.is_pressed() == True:
@@ -25,10 +24,8 @@ while True:
                 theta = - (degX + 180)
 
             time1 = running_time() #get the current running time
-            time.append(time1-time0)
-            angles.append(theta)
+            angles.write(str(theta), "\n")
+            time.write(str(time1-time0), "\n")
 
             if button_b.is_pressed()== True:
-                myFile.write(str(angles))
-                myFile.write(str(time))
                 myFile.close()
