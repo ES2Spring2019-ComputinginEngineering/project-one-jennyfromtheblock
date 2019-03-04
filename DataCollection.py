@@ -24,8 +24,11 @@ while True:
                 theta = - (degX + 180)
 
             time1 = running_time() #get the current running time
-            angles.write(str(theta), "\n")
-            time.write(str(time1-time0), "\n")
+            angles.write(str(theta))
+            angles.write(str("\n"))
+            time.write(str(time1-time0))
+            time.write(str("\n"))
 
             if button_b.is_pressed()== True:
-                myFile.close()
+                angles.close()
+                time.close()
