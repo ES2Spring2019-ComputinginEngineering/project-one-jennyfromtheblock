@@ -31,5 +31,5 @@ while True:
             myFile.write("\n")
             print(angles)
 
-            if button_b.is_pressed():
+            if button_b.is_pressed()== True:
                 myFile.close()
