@@ -1,9 +1,14 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#Project 1- Data Analysis
-"""
-Created on Mon Mar  4 15:44:39 2019
+#Project 1: Pedulum - Data Analysis
+#Allie and Yassi
 
-@author: Yasaman
-"""
+import matplotlib.pyplot as plt
+import numpy as np
+import math
 
+g = -9.81
+l = 0.365
+
+myFile = open("Test1anglesES2.txt", "r")
+contents = myFile.read()
+
+print(type(contents))
