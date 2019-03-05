@@ -5,30 +5,21 @@ from microbit import *
 import math
 import os
 
-angles = open('angles.txt', 'w')
-time = open('time.txt', 'w')
-
 while True:
+
     if button_a.is_pressed() == True:
-        time0 = running_time() #get the current running time
-        while True:
-            sleep(50)
-            x = accelerometer.get_x()
-            z = accelerometer.get_z()
-            radX = math.atan2(x, z) #Tilt in x-direction
-            degX = radX / math.pi * 180 #Converting angle of x-tilt from radians to degrees
+        with open('data.txt', 'w') as data:
+            time0 = running_time() #get the current running time
+            while True:
+                display.show(Image.HAPPY)
+                sleep(50)
+                x = accelerometer.get_x()
+                z = accelerometer.get_z()
 
-            if degX > 0:
-                theta = - degX + 180
-            else:
-                theta = - (degX + 180)
+                time1 = running_time() #get the current running time
+                data.write(str(time1-time0) + "," + str(x) + "," + str(z)+"\n")
 
-            time1 = running_time() #get the current running time
-            angles.write(str(theta))
-            angles.write(str("\n"))
-            time.write(str(time1-time0))
-            time.write(str("\n"))
-
-            if button_b.is_pressed()== True:
-                angles.close()
-                time.close()
+                if button_b.is_pressed()== True:
+                    display.show(Image.HEART)
+                    data.close()
+                    break
