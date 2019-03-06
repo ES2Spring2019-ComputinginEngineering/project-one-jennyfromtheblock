@@ -1,6 +1,12 @@
 #Project 1: Pedulum - Data Collection
 #Allie and Yassi
 
+""" first trial: l=0.38m?
+    second trial: l=0.26m
+    third trial: l=0.28m
+    fourth trial: l=0.30m
+    fifth trial: l=0.33m
+"""
 from microbit import *
 import math
 import os
