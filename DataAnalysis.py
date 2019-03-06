@@ -7,7 +7,7 @@ import scipy.signal as sig
 import math
 
 g = -9.81
-l = 0.38
+l = 0.26
 zAcc = []
 xAcc = []
 time = []
@@ -15,7 +15,7 @@ angles = []
 
 
 #openning the data file and extracting the data:
-with open ("firstTrial.txt", "r") as file:
+with open ("secondTrial.txt", "r") as file:
     for line in file:
         line = line.rstrip().split(",")
         t = float(line[0])
@@ -40,14 +40,14 @@ t = np.asarray(time)
 theta = np.asarray(angles)
 filt_theta = sig.medfilt(theta,3)
 theta_pks, _ = sig.find_peaks(theta)
-theta_filt_pks, _ = sig.find_peaks(filt_theta)
+theta_filt_pks, _ = sig.find_peaks(filt_theta, prominence=50)
 
 #Plotting the angle vs. time graph
 plt.subplot(3,1,1)
 plt.plot(t, filt_theta, 'r-', t[theta_filt_pks],filt_theta[theta_filt_pks] , 'ko')
 plt.xlabel('Time (milliseconds)')
 plt.ylabel('Angle (degrees)')
-plt.title('Position vs Time')
+plt.title('Angle vs Time')
 plt.xlim((500, 4000)) 
 plt.grid()
 
@@ -56,7 +56,7 @@ plt.subplot(3,1,3)
 plt.plot(time, xAcc, 'r-') 
 plt.xlabel('Time (milliseconds)')
 plt.ylabel('Acceleration (m/s^2)')
-plt.title('Acceleration vs Time')
+plt.title('Acceleration (x-direction) vs Time')
 plt.xlim((500, 4000)) 
 plt.grid()
 plt.tight_layout()
@@ -66,7 +66,7 @@ plt.subplot(3,1,2)
 plt.plot(time, zAcc, 'b-') 
 plt.xlabel('Time (milliseconds)')
 plt.ylabel('Acceleration (m/s^2)')
-plt.title('Acceleration vs Time')
+plt.title('Acceleration (z-direction) vs Time')
 plt.xlim((500, 4000)) 
 plt.grid()
 plt.tight_layout()
