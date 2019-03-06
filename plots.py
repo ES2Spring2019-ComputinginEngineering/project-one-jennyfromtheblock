@@ -1,12 +1,13 @@
-#Project 1: Pedulu  m
+#Project 1: Pedulum
 #Allie and Yassi
 
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import scipy.signal as sig
 
 g = -9.81
-l = 0.3
+l = 0.38
 
 def update_system(angAcc,theta,angVel,time1,time2):
     # position and velocity update below
@@ -57,3 +58,10 @@ plt.title('Acceleration vs Time')
 plt.xlim((0, 10)) 
 plt.grid()
 plt.tight_layout()
+
+#Determining period by averaging time differences
+theta_pks, _ = sig.find_peaks(theta)
+peaks = time[theta_pks[1:]]
+time_difference = np.diff(peaks)
+period = str(np.sum(time_difference)/len(time_difference))
+print("Period: " + period + "s")
