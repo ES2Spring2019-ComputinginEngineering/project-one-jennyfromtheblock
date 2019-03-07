@@ -1,5 +1,6 @@
 #Project 1: Pedulum - Data Analysis
 #Allie and Yassi
+#Analysis of data obtained from microbit
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,8 +14,7 @@ xAcc = []
 time = []
 angles = []
 
-
-#openning the data file and extracting the data:
+#Openning the data file and extracting the recorded data:
 with open ("secondTrial.txt", "r") as file:
     for line in file:
         line = line.rstrip().split(",")
@@ -25,17 +25,13 @@ with open ("secondTrial.txt", "r") as file:
         zAcc.append(z_acceleration)
         time.append(t)
 
-##applying filter to the raw data:
-#x_filt = sig.medfilt(xAcc)
-#z_filt = sig.medfilt(zAcc)
-#x_noisy_filt_pks, _ = sig.find_peaks(x_filt)
-
+#Calculating the angle of tilt using acceleration values
 for i in range(len(zAcc)):
     radX = math.atan2(xAcc[i],zAcc[i])#Tilt in x-direction
     degX = radX * 180 / math.pi#Converting angle of x-tilt from radians to degrees
     angles.append(degX)
 
-#convert the lists to np.arrays
+#Converting the lists to np.arrays & applying filter to the raw data:
 t = np.asarray(time)
 theta = np.asarray(angles)
 filt_theta = sig.medfilt(theta,3)
@@ -51,7 +47,7 @@ plt.title('Angle vs Time')
 plt.xlim((500, 4000)) 
 plt.grid()
 
-#Plotting the  acceleration vs. time graph
+#Plotting the  acceleration (x-direction) vs. time graph
 plt.subplot(3,1,3)
 plt.plot(time, xAcc, 'r-') 
 plt.xlabel('Time (milliseconds)')
@@ -61,7 +57,7 @@ plt.xlim((500, 4000))
 plt.grid()
 plt.tight_layout()
 
-#Plotting the  acceleration vs. time graph
+#Plotting the  acceleration (z-direction) vs. time graph
 plt.subplot(3,1,2)
 plt.plot(time, zAcc, 'b-') 
 plt.xlabel('Time (milliseconds)')
