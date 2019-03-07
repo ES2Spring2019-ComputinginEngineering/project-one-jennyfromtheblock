@@ -11,7 +11,7 @@ while True:
             time0 = running_time() #gets the current running time when button a is pressed
             while True:
                 sleep(50)
-                x = accelerometer.get_x()
+                x = accelerometer.get_x() #gets values from microbit
                 z = accelerometer.get_z()
                 time1 = running_time() #gets the current running time
                 data.write(str(time1-time0) + "," + str(x) + "," + str(z)+"\n") #records the time and acceleration values to file
