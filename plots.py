@@ -1,5 +1,6 @@
 #Project 1: Pedulum
 #Allie and Yassi
+#Pendulum Simulation
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,22 +10,22 @@ import scipy.signal as sig
 g = -9.81
 l = 0.38
 
+#Updating the values of the the angular variables
 def update_system(angAcc,theta,angVel,time1,time2):
-    # position and velocity update below
     dt = time2-time1
     newTheta = theta + angVel * dt
     newAngVel = angVel + angAcc*dt
     newAngAcc = (g/l) * math.cos((math.pi/2) - newTheta)
     return newTheta,newAngVel,newAngAcc
 
-# initial conditions
+#Setting the initial conditions
 theta = [(math.pi)/6]
 angVel = [0]
 angAcc = [0]
 time = np.linspace(0,10,10000)
 
+#Updating the position and velocity using previous values and time step
 for i in range(1, len(time)):
-    # update position and velocity using previous values and time step
     newTheta, newAngVel , newAngAcc = update_system(angAcc[i-1],theta[i-1],angVel[i-1],time[i-1],time[i])
     theta.append(newTheta)
     angVel.append(newAngVel)
@@ -36,7 +37,7 @@ plt.subplot(3,1,1)
 plt.plot(time, theta, 'ro--') 
 plt.xlabel('Time (seconds)')
 plt.ylabel('Angle (radians)')
-plt.title('Position vs Time')
+plt.title('Angle vs Time')
 plt.xlim((0, 10)) 
 plt.grid()
 
